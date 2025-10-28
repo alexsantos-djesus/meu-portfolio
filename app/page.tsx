@@ -10,7 +10,6 @@ import { whatsappLink } from "@/lib/whatsapp";
 import ProjectsShowcase from "@/components/sections/ProjectsShowcase";
 import { Zap, Search, ShieldCheck, MessageSquare } from "lucide-react";
 
-
 const NeonConstellation = dynamic<{ paused?: boolean }>(() => import("@/components/visuals/NeonConstellation"),
   { ssr: false, loading: () => <div className="h-60" /> }
 );
