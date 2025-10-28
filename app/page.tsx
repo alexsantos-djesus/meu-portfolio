@@ -10,6 +10,7 @@ import { whatsappLink } from "@/lib/whatsapp";
 import ProjectsShowcase from "@/components/sections/ProjectsShowcase";
 import { Zap, Search, ShieldCheck, MessageSquare } from "lucide-react";
 
+
 const NeonConstellation = dynamic<{ paused?: boolean }>(() => import("@/components/visuals/NeonConstellation"),
   { ssr: false, loading: () => <div className="h-60" /> }
 );
@@ -143,7 +144,7 @@ export default function HomePage() {
               type="button"
               onClick={() => setPaused3D((v) => !v)}
               className="text-xs underline text-neon-cyan focus-ring"
-              aria-pressed={paused3D}
+              aria-pressed={paused3D ? "true" : "false"} // <-- aqui
             >
               {paused3D ? "▶️ Retomar" : "⏸️ Pausar"}
             </button>
