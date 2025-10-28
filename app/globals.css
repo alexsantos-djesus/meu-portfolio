@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { --grid: 12px; }
+html, body { height: 100%; }
+body { @apply bg-black text-zinc-100 antialiased; background-image: radial-gradient(ellipse at 20% 10%, rgba(0,255,225,0.05), transparent 35%), radial-gradient(ellipse at 80% 30%, rgba(255,0,245,0.04), transparent 35%); }
+.glass { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); backdrop-filter: blur(10px); }
+.scanlines { background-image: var(--scanlines); background-size: 100% 2px; mix-blend-mode: overlay; pointer-events: none; }
+.gradient-border { position: relative; }
+.gradient-border::before { content: ""; position: absolute; inset: -1px; z-index: -1; background: linear-gradient(90deg, #00FFE1, #FF00F5, #00A3FF); filter: blur(8px); opacity: .6; }
+.focus-ring:focus { outline: 2px solid #00FFE1; outline-offset: 2px; }

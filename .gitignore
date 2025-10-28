@@ -1,0 +1,71 @@
+# === Node / package managers ===
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# === Next.js ===
+.next/
+out/
+dist/
+# Next Telemetry
+.next/trace
+.next/static/cache
+
+# === Build tools / caches ===
+.turbo/
+.eslintcache
+.stylelintcache
+.cache/
+coverage/
+.nyc_output/
+
+# === OS / editors ===
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# === Env / secrets ===
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+.env.*.local
+
+# (mantenha o .env.example versionado)
+
+# === Prisma ===
+# (mantenha prisma/schema.prisma e prisma/migrations no repo)
+prisma/*.db
+prisma/*.sqlite
+prisma/dev.db*
+prisma/test.db*
+
+# === Playwright (E2E) ===
+playwright-report/
+test-results/
+playwright/.cache/
+
+# === NextAuth (debug dumps ocasionais) ===
+*.session.db
+*.session.sql
+
+# === Uploads locais (dev) ===
+public/uploads/
+
+# === OS junk ===
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# === Misc ===
+*.tgz
+*.orig
