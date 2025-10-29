@@ -3,6 +3,11 @@ import { ReactNode } from "react";
 import { auth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { toggleAuth } from "./actions";
+import type { DefaultSession } from "next-auth";
+
+type AppUser =
+  | (DefaultSession["user"] & { isActive?: boolean; role?: string })
+  | undefined;
 
 export default async function AdminLayout({
   children,
@@ -10,10 +15,8 @@ export default async function AdminLayout({
   children: ReactNode;
 }) {
   const session = await auth();
-  const user = session?.user as
-    | (typeof session.user & { isActive?: boolean; role?: string })
-    | undefined;
-  const canAdmin = !!user?.isActive;
+  const user = (session?.user ?? undefined) as AppUser;
+  const canAdmin = user?.isActive === true; // ajuste se também quiser exigir role === "ADMIN"
 
   return (
     <div className="space-y-6">
