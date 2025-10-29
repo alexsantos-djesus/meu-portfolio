@@ -1,16 +1,28 @@
-// middleware.ts
-import { NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
+import { NextResponse } from "next/server";
 
-export async function middleware(req: Request) {
-  const url = new URL(req.url);
-  if (url.pathname.startsWith("/admin")) {
-    const session = await auth();
-    if (!session?.user) {
-      return NextResponse.redirect(new URL("/login", url));
-    }
+export default auth((req) => {
+  const { nextUrl } = req;
+  const isAdminRoute = nextUrl.pathname.startsWith("/admin");
+
+  if (!isAdminRoute) return NextResponse.next();
+
+  // não logado → login
+  if (!req.auth) {
+    const url = new URL("/login", nextUrl);
+    url.searchParams.set("callbackUrl", nextUrl.pathname);
+    return NextResponse.redirect(url);
   }
-  return NextResponse.next();
-}
 
-export const config = { matcher: ["/admin/:path*"] };
+  // logado mas não ativo → acesso negado
+  const isActive = (req.auth.user as any)?.isActive;
+  if (!isActive) {
+    return NextResponse.redirect(new URL("/auth/denied", nextUrl));
+  }
+
+  return NextResponse.next();
+});
+
+export const config = {
+  matcher: ["/admin/:path*"],
+};

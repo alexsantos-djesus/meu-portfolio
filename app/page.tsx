@@ -7,9 +7,13 @@ import { motion, useReducedMotion } from "framer-motion";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import { whatsappLink } from "@/lib/whatsapp";
+import ProjectsShowcase from "@/components/sections/ProjectsShowcase";
+import { Zap, Search, ShieldCheck, MessageSquare } from "lucide-react";
 
-const TechCube = dynamic<{ paused?: boolean }>(
-  () => import("@/components/3d/TechCube"),
+const NeonConstellation = dynamic<{ paused?: boolean }>(() => import("@/components/visuals/NeonConstellation"),
+  { ssr: false, loading: () => <div className="h-60" /> }
+);
+const TechCube = dynamic<{ paused?: boolean }>(() => import("@/components/3d/TechCube"),
   { ssr: false, loading: () => <div className="h-60" /> }
 );
 const WeatherDemo = dynamic(() => import("@/components/demos/WeatherDemo"), {
@@ -36,44 +40,42 @@ const roles = [
 ];
 
 export default function HomePage() {
-  const prefersReducedMotion = useReducedMotion();
-  const [paused3D, setPaused3D] = useState(prefersReducedMotion);
-  const [roleIdx, setRoleIdx] = useState(0);
-  useEffect(() => {
-    if (prefersReducedMotion) return;
-    const id = setInterval(
-      () => setRoleIdx((i) => (i + 1) % roles.length),
-      2200
-    );
-    return () => clearInterval(id);
-  }, [prefersReducedMotion]);
-  const role = useMemo(() => roles[roleIdx], [roleIdx]);
+  const prefersReducedMotion = useReducedMotion() ?? false; // sempre boolean
+  const [paused3D, setPaused3D] = useState<boolean>(prefersReducedMotion);
+    useEffect(() => {
+      setPaused3D(prefersReducedMotion);
+    }, [prefersReducedMotion]);
+  const role = useMemo(() => {
+    const idx = Math.floor(Date.now() / 4000) % roles.length;
+    return roles[idx];
+  }, [Date.now()]);
 
   const msg =
     "Olá Alex! Vim pelo seu portfólio e quero falar sobre um projeto.";
 
   return (
-    <div className="space-y-14">
+    <div className="space-y-16">
       {/* HERO */}
-      <section className="grid md:grid-cols-2 gap-8 items-center">
+      <section className="grid md:grid-cols-2 gap-10 items-center">
         <div>
           <motion.h1
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.35 }}
-            className="text-4xl md:text-6xl font-bold tracking-tight"
+            className="text-5xl md:text-7xl font-extrabold leading-tight"
           >
             <span className="text-neon-cyan block">Alex Santos</span>
-            <span className="block mt-2 text-2xl md:text-3xl text-zinc-300 font-mono">
+            <span className="mt-3 block text-2xl md:text-3xl text-zinc-300 font-mono">
               <Typewriter text={role} />
             </span>
           </motion.h1>
-          <p className="mt-4 text-zinc-300 max-w-xl">
-            Portfólio + vitrine de serviços. Foco em{" "}
-            <strong>performance</strong>, <strong>SEO</strong> e{" "}
-            <strong>DX</strong>, com estética geek/retro-futurista, animações
-            suaves e 3D leve.
+
+          <p className="mt-5 text-zinc-300/95 max-w-2xl">
+            Transformo ideias em experiências web <strong>rápidas</strong>,{" "}
+            <strong>bonitas</strong> e <strong>fáceis de usar</strong>. Do
+            layout ao deploy, com métricas, SEO técnico e muita personalidade.
           </p>
+
           <div className="mt-6 flex flex-wrap gap-3">
             <Link href="/projetos">
               <Button variant="outline">Ver Projetos</Button>
@@ -85,29 +87,58 @@ export default function HomePage() {
               <Button variant="glow">Fale no WhatsApp</Button>
             </a>
           </div>
-          <ul className="mt-6 grid sm:grid-cols-2 gap-2 text-sm text-zinc-300">
-            <li className="glass rounded-xl px-3 py-2">
-              App Router + APIs tipadas
-            </li>
-            <li className="glass rounded-xl px-3 py-2">
-              Prisma ORM + Postgres (Neon)
-            </li>
-            <li className="glass rounded-xl px-3 py-2">
-              NextAuth (Google) para Admin
-            </li>
-            <li className="glass rounded-xl px-3 py-2">
-              CTAs diretos p/ WhatsApp
-            </li>
-          </ul>
+
+          <div className="mt-7 grid gap-3 sm:grid-cols-2">
+            {[
+              {
+                icon: Zap,
+                label: "Rápido de verdade",
+                desc: "Otimização, cache, imagens automáticas",
+              },
+              {
+                icon: Search,
+                label: "SEO técnico",
+                desc: "Schema, OpenGraph, sitemap e canonical",
+              },
+              {
+                icon: ShieldCheck,
+                label: "Admin simples",
+                desc: "Login Google + CRUD limpo",
+              },
+              {
+                icon: MessageSquare,
+                label: "WhatsApp direto",
+                desc: "CTAs com mensagem pronta",
+              },
+            ].map(({ icon: Icon, label, desc }) => (
+              <div
+                key={label}
+                className="rounded-xl bg-white/[0.03] ring-1 ring-white/10 p-3 hover:bg-white/[0.05] transition-colors"
+              >
+                <div className="flex items-start gap-3">
+                  <div className="mt-0.5 rounded-md p-1.5 bg-cyan-400/10 ring-1 ring-cyan-400/20">
+                    <Icon className="h-4 w-4 text-cyan-300" />
+                  </div>
+                  <div>
+                    <div className="text-sm font-medium">{label}</div>
+                    <div className="text-xs text-zinc-400 leading-relaxed">
+                      {desc}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.15 }}
+          transition={{ delay: 0.12 }}
           className="gradient-border rounded-2xl p-2"
         >
           <div className="flex items-center justify-between px-2 pt-2">
-            <span className="text-xs text-zinc-400">Tech Cube (Three.js)</span>
+            <span className="text-xs text-zinc-400">Neon Constellation</span>
             <button
               type="button"
               onClick={() => setPaused3D((v) => !v)}
@@ -117,13 +148,13 @@ export default function HomePage() {
               {paused3D ? "▶️ Retomar" : "⏸️ Pausar"}
             </button>
           </div>
-          <TechCube paused={paused3D} />
+          <NeonConstellation paused={paused3D} />
         </motion.div>
       </section>
 
       {/* DEMOS */}
       <section className="space-y-6">
-        <h2 className="text-2xl font-semibold">Demos em destaque</h2>
+        <h2 className="text-2xl font-semibold">Demotrações em destaque</h2>
 
         {/* 1) Clima & Jockey */}
         <div className="grid lg:grid-cols-2 gap-6 auto-rows-fr items-stretch">
@@ -178,6 +209,8 @@ export default function HomePage() {
           <FinancePro />
         </div>
       </section>
+
+      <ProjectsShowcase />
 
       {/* SOBRE + CERTIFICAÇÕES */}
       <section className="grid md:grid-cols-[320px,1fr] gap-6 items-start">

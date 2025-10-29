@@ -14,11 +14,12 @@ export default async function LoginPage() {
       <form
         action={async () => {
           "use server";
-          if (session) {
-            await signOut();
+          const s = await auth();
+          if (s) {
+            await signOut({ redirectTo: "/" }); // ← volta para a home
             return;
           }
-          await signIn("google");
+          await signIn("google", { redirectTo: "/admin" });
         }}
       >
         <Button variant="glow">{session ? "Sair" : "Entrar com Google"}</Button>

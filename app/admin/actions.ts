@@ -5,8 +5,8 @@ import { auth, signIn, signOut } from "@/lib/auth";
 export async function toggleAuth() {
   const session = await auth();
   if (session) {
-    await signOut();
+    await signOut({ redirectTo: "/" }); // ← home após sair
     return;
   }
-  await signIn("google");
+  await signIn("google", { redirectTo: "/admin" });
 }
