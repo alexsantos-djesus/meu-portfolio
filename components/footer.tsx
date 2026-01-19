@@ -4,8 +4,8 @@ export function Footer() {
       <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-4">
         <p>© 2025 Alex Santos. Todos os direitos reservados.</p>
         <div className="flex gap-4">
-          <a href="https://github.com/alex" aria-label="GitHub">GitHub</a>
-          <a href="https://www.linkedin.com/in/alex" aria-label="LinkedIn">LinkedIn</a>
+          <a href="https://github.com/alexsantos-djesus" aria-label="GitHub">GitHub</a>
+          <a href="https://www.linkedin.com/in/alex-santos-97977b29b" aria-label="LinkedIn">LinkedIn</a>
           <a href="https://instagram.com/debuguei" aria-label="Instagram">Instagram</a>
         </div>
       </div>
