@@ -27,9 +27,9 @@ export default function Contato() {
 
       <div className="flex gap-3">
         <a href={whatsappLink("Olá! Vim do site e quero conversar.")}><Button variant="outline">WhatsApp Direto</Button></a>
-        <a href="https://www.linkedin.com/in/alex"><Button variant="ghost">LinkedIn</Button></a>
-        <a href="https://github.com/alex"><Button variant="ghost">GitHub</Button></a>
-        <a href="https://instagram.com/alex"><Button variant="ghost">Instagram</Button></a>
+        <a href="https://www.linkedin.com/in/alex-santos-97977b29b"><Button variant="ghost">LinkedIn</Button></a>
+        <a href="https://github.com/alexsantos-djesus"><Button variant="ghost">GitHub</Button></a>
+        <a href="https://instagram.com/debuguei"><Button variant="ghost">Instagram</Button></a>
       </div>
     </div>
   );
