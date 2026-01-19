@@ -6,7 +6,7 @@ export function Footer() {
         <div className="flex gap-4">
           <a href="https://github.com/alex" aria-label="GitHub">GitHub</a>
           <a href="https://www.linkedin.com/in/alex" aria-label="LinkedIn">LinkedIn</a>
-          <a href="https://instagram.com/alex" aria-label="Instagram">Instagram</a>
+          <a href="https://instagram.com/debuguei" aria-label="Instagram">Instagram</a>
         </div>
       </div>
     </footer>
