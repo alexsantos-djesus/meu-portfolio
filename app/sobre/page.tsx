@@ -60,7 +60,7 @@ export default function Sobre() {
             </Button>
           </a>
           <a
-            href="https://www.linkedin.com/in/alexsantos-djesus"
+            href="https://www.linkedin.com/in/alex-santos-97977b29b"
             target="_blank"
             rel="noreferrer"
           >
