@@ -69,7 +69,7 @@ export default function Sobre() {
               LinkedIn
             </Button>
           </a>
-          <a href="mailto:alex@debuguei.com.br">
+          <a href="mailto:alexsantos.djesus@gmail.com">
             <Button variant="outline">
               <Mail className="mr-2 h-4 w-4" />
               E-mail
@@ -99,7 +99,7 @@ export default function Sobre() {
         <motion.div {...fade} className="glass rounded-2xl p-6 leading-relaxed">
           <div className="font-mono text-sm space-y-2">
             <div className="text-neon-cyan">
-              alex@debuguei.com.br — Salvador/BA
+              alexsantos.djesus@gmail.com — Salvador/BA
             </div>
             <div>$ whoami → alex</div>
             <div>
@@ -271,7 +271,7 @@ export default function Sobre() {
             "@context": "https://schema.org",
             "@type": "Person",
             name: "Alex Santos",
-            email: "mailto:alex@debuguei.com.br",
+            email: "mailto:alexsantos.djesus@gmail.com",
             jobTitle: "Full-stack Engineer",
             url: "https://www.debuguei.com.br",
             sameAs: [
